@@ -28,6 +28,13 @@ function Get-DNSRecords {
     $Records = Get-WmiObject -Class MicrosoftDNS_AType -Namespace "root\MicrosoftDNS" -ComputerName $DnsServer -Filter "ContainerName='$Zone'"
     return $Records
 }
+<# Invoke with credential
+$credential = Get-Credential
+Invoke-Command -ComputerName 'lis-dc-01' -Credential $credential -ScriptBlock {
+    Get-DnsServerZone
+}
+#>
+
 
 # Function to identify duplicate DNS records
 function Get-DuplicateRecords {
